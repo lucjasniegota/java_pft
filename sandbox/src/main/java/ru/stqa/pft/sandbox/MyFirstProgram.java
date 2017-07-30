@@ -5,21 +5,17 @@ public class MyFirstProgram {
       hello("world");
       hello("łucja");
 
-      double l = 5;
-        System.out.println("powierzchnia kwadratu o boku " + l + " = " + area(l));
-      double a = 8;
-      double b = 6;
-        System.out.println("powierzchnia prostokata  bokach " + a + " i " + b + " = " + area(a,b));
+      Square s = new Square(5);
+        System.out.println("powierzchnia kwadratu o boku " + s.l + " = " + s.area());
+
+      Rectangle r = new Rectangle(5 , 8);
+
+        System.out.println("powierzchnia prostokata o bokach " + r.a + " i " + r.b + " = " + r.area());
       }
 
     public static void hello (String somebody) {
         ;
         System.out.println("Hello " + somebody);
     }
-    public static double area(double len){
-        return len * len;
-    }
-    public static double area (double a, double b){
-        return a * b;
-    }
+
 }
