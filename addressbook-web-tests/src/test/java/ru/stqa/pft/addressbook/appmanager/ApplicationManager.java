@@ -23,14 +23,6 @@ public class ApplicationManager {
     this.browser = browser;
   }
 
-  public static boolean isAlertPresent(FirefoxDriver wd) {
-    try {
-      wd.switchTo().alert();
-      return true;
-    } catch (NoAlertPresentException e) {
-      return false;
-    }
-  }
   public void init() {
     if (browser == BrowserType.FIREFOX) {
       wd = new FirefoxDriver(new FirefoxOptions().setLegacy(true));
