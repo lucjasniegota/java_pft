@@ -48,9 +48,7 @@ public class ContactHelper extends HelperBase {
     click(By.name("selected[]"));
   }
 
-  public void gotoHomePage() {
-    click(By.linkText("home"));
-  }
+
 
   public void deleteContact() {
     click(By.xpath("//input[@value='Delete']"));
