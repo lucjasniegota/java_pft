@@ -90,12 +90,10 @@ public class ContactHelper extends HelperBase {
     List<WebElement> elements = wd.findElements(By.xpath("//table[@id='maintable']//td[3]"));
     for (WebElement element : elements){
       String firstname = element.getText();
-       int id;
-      id = Integer.parseInt(element.findElement(By.xpath("//table[@id='maintable']//td/input")).getAttribute("value"));
+       int id = Integer.parseInt(element.findElement(By.xpath("//table[@id='maintable']//td/input")).getAttribute("value"));
       ContactData contact = new ContactData(id, firstname, null, null, null);
       contacts.add(contact);
     }
     return contacts;
-
 }
 }
