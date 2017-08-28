@@ -8,7 +8,7 @@ import java.util.List;
 
 public class ContactDeletionTests extends TestBase{
 
-    @Test (enabled = false)
+    @Test
     public void testContactDeletion(){
         app.goTo().homePage();
       List<ContactData> before = app.contact().getContactList();

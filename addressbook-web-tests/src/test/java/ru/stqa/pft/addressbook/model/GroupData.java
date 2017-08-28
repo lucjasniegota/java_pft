@@ -18,7 +18,7 @@ public class GroupData {
   public String getFooter() {
     return footer;
   }
-  
+
   public GroupData withId(int id) {
     this.id = id;
     return this;

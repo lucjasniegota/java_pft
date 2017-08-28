@@ -15,7 +15,7 @@ public class ContactCreationTests extends TestBase {
   public void testContactCreation() throws InterruptedException {
     app.goTo().groupPage();
     if (! app.group().isThereAGroup()){
-      app.group().create(new GroupData("test1", "test1", "trst1"));
+      app.group().create(new GroupData().withName("test5"));
     }
     app.goTo().homePage();
     Thread.sleep(2000);
