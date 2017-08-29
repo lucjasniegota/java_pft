@@ -3,14 +3,11 @@ package ru.stqa.pft.addressbook.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import ru.stqa.pft.addressbook.model.GroupData;
 import ru.stqa.pft.addressbook.model.Groups;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class GroupHelper extends HelperBase{
   public GroupHelper(WebDriver wd){
@@ -58,6 +55,7 @@ public class GroupHelper extends HelperBase{
     initGroupCreation();
     fillGroupForm(group);
     submitGroupCreation();
+    groupCache = null;
     returnGroupPage();
   }
   public void modify(GroupData group) {
@@ -65,23 +63,53 @@ public class GroupHelper extends HelperBase{
     initGroupModification();
     fillGroupForm(group);
     submitGroupModification();
+    groupCache = null;
     returnGroupPage();
   }
-  public void modify(int index, GroupData group) {
-    selectGroup(index);
-    initGroupModification();
-    fillGroupForm(group);
-    submitGroupModification();
-    returnGroupPage();
-  }
+
   public void delete(GroupData group) {
     selectGroupById(group.getId());
     deleteGroup();
+    groupCache = null;
     returnGroupPage();}
 
   private void selectGroupById(int id) {
     wd.findElement(By.cssSelector("input[value = '"+ id +"'] ")).click();
   }
+
+
+
+
+  private Groups groupCache = null;
+
+  public Groups all() {
+    if (groupCache !=null) {
+      return new Groups(groupCache);
+    }
+    groupCache = new Groups();
+    List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
+    for (WebElement element : elements) {
+      String name = element.getText();
+      int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
+      groupCache.add(new GroupData().withId(id).withName(name));
+    }
+    return new Groups(groupCache);
+  }
+
+
+
+
+  public List<GroupData> list() {
+    List<GroupData> groups = new ArrayList<GroupData>();
+    List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
+    for (WebElement element : elements) {
+      String name = element.getText();
+      int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
+      groups.add(new GroupData().withId(id).withName(name));
+    }
+    return groups;
+  }
+
 
   public void delete(int index) {
     selectGroup(index);
@@ -96,27 +124,10 @@ public class GroupHelper extends HelperBase{
     return wd.findElements(By.name("selected[]")).size();
   }
 
-  public List<GroupData> list() {
-    List<GroupData> groups = new ArrayList<GroupData>();
-    List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
-    for (WebElement element : elements) {
-      String name = element.getText();
-      int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-      groups.add(new GroupData().withId(id).withName(name));
-    }
-    return groups;
-  }
-  public Groups all() {
-    Groups groups = new Groups();
-    List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
-    for (WebElement element : elements) {
-      String name = element.getText();
-      int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-      groups.add(new GroupData().withId(id).withName(name));
-    }
-    return groups;
-  }
-
-
-
-}
+  public void modify(int index, GroupData group) {
+    selectGroup(index);
+    initGroupModification();
+    fillGroupForm(group);
+    submitGroupModification();
+    returnGroupPage();
+  }}
