@@ -3,6 +3,7 @@ package ru.stqa.pft.addressbook.tests;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
+import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.GroupData;
 
 import java.util.Set;
@@ -23,14 +24,12 @@ public class ContactCreationTests extends TestBase {
   @Test
   public void testContactCreation(){
     app.goTo().homePage();
-    Set<ContactData> before = app.contact().all();
+    Contacts before = app.contact().all();
     ContactData contact = new ContactData().withFirstname("nowa").withLastname("nowa").withEmail("lucja@gmail.com").withGroup("test5");
     app.contact().create(contact, true);
-    Set<ContactData> after = app.contact().all();
+    Contacts after = app.contact().all();
     assertThat(after.size(), equalTo(before.size() +1));
-    contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt());
-    before.add(contact);
-    assertThat(after, equalTo(before));
+    assertThat(after, equalTo(before.withAdded( contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
   }}
 
 
