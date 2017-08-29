@@ -121,8 +121,9 @@ private Contacts contactCache = null;
      List<WebElement> cells = element.findElements(By.tagName("td"));
      String firstname = cells.get(2).getText();
      String lastname = cells.get(1).getText();
-      String[] phones = cells.get(5).getText().split("/n");
-      ContactData contact = new ContactData().withId(id).withFirstname(firstname).withLastname(lastname);
+     String[] phones = cells.get(5).getText().split("\n");
+      ContactData contact = new ContactData().withId(id).withFirstname(firstname).withLastname(lastname)
+              .withPhoneHome(phones[0]).withPhoneMobile(phones[1]).withPhoneWork(phones[2]);
       contactCache.add(contact);
     }
     return new Contacts (contactCache);
