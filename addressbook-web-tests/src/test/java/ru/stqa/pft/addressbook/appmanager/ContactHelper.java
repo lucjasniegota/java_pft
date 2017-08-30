@@ -121,9 +121,9 @@ private Contacts contactCache = null;
      List<WebElement> cells = element.findElements(By.tagName("td"));
      String firstname = cells.get(2).getText();
      String lastname = cells.get(1).getText();
-     String[] phones = cells.get(5).getText().split("\n");
+     String allPhones = cells.get(5).getText();
       ContactData contact = new ContactData().withId(id).withFirstname(firstname).withLastname(lastname)
-              .withPhoneHome(phones[0]).withPhoneMobile(phones[1]).withPhoneWork(phones[2]);
+              .withAllPhone(allPhones);
       contactCache.add(contact);
     }
     return new Contacts (contactCache);
@@ -166,12 +166,12 @@ private Contacts contactCache = null;
     String  firstname  = wd.findElement(By.name("firstname")).getAttribute("value");
     String lastname  = wd.findElement(By.name("lastname")).getAttribute("value");
     String email  = wd.findElement(By.name("email")).getAttribute("value");
-    String home  = wd.findElement(By.name("home")).getAttribute("value");
-    String mobile  = wd.findElement(By.name("mobile")).getAttribute("value");
-    String work  = wd.findElement(By.name("work")).getAttribute("value");
+    String phoneHome  = wd.findElement(By.name("home")).getAttribute("value");
+    String phoneMobile  = wd.findElement(By.name("mobile")).getAttribute("value");
+    String phoneWork  = wd.findElement(By.name("work")).getAttribute("value");
     wd.navigate().back();
-    return new ContactData().withId(contact.getId()).withFirstname(contact.getFirstname())
-            .withLastname(contact.getLastname()).withEmail(contact.getEmail()).withPhoneHome(contact.getPhoneHome())
-            .withPhoneMobile(contact.getPhoneMobile()).withPhoneWork(contact.getPhoneWork());
+    return new ContactData().withId(contact.getId()).withFirstname(firstname)
+            .withLastname(lastname).withEmail(email).withPhoneHome(phoneHome)
+            .withPhoneMobile(phoneMobile).withPhoneWork(phoneWork);
   }
 }
