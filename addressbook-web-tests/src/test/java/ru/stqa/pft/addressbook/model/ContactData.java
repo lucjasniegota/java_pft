@@ -75,10 +75,10 @@ public class ContactData {
     this.phoneMobile = phoneMobile;
     return this;}
     public ContactData withEmail2(String email2) {
-    this.phoneMobile = email2;
+    this.email2 = email2;
     return this;}
     public ContactData withEmail3(String email3) {
-    this.phoneMobile = email3;
+    this.email3 = email3;
     return this;}
     public ContactData withAllEmails(String allEmails) {
     this.allEmails = allEmails;

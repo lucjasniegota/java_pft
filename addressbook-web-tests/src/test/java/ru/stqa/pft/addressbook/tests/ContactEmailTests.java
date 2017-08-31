@@ -27,20 +27,20 @@ public class ContactEmailTests extends TestBase{
   }
 
   @Test
-  public void testEmailtPhone(){
+  public void testContactEmail(){
     app.goTo().homePage();
     ContactData contact = app.contact().all().iterator().next();
     ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact);
-    assertThat(contact.getAllPhone(), equalTo(mergePhones(contactInfoFromEditForm)));
+    assertThat(contact.getAllEmails(), equalTo(mergeEmails(contactInfoFromEditForm)));
+    assertThat(contact.getAddress(), equalTo(contactInfoFromEditForm.getAddress()));}
 
-  }
-  private String mergePhones(ContactData contact) {
-    return Arrays.asList(contact.getPhoneHome(),contact.getPhoneMobile(),contact.getPhoneWork())
+  private String mergeEmails(ContactData contact) {
+    return Arrays.asList(contact.getEmail(),contact.getEmail2(),contact.getEmail3())
             .stream().filter((s) ->!s.equals("")).map(ContactPhoneTests::cleaned).collect(Collectors.joining("\n"));
   }
 
 
   public static String cleaned (String phone){
-    return phone.replaceAll("\\s","").replaceAll("[-()]","");
+    return phone.replaceAll("\\s","");
   }
 }

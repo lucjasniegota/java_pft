@@ -177,6 +177,6 @@ private Contacts contactCache = null;
     wd.navigate().back();
     return new ContactData().withId(contact.getId()).withFirstname(firstname)
             .withLastname(lastname).withEmail(email).withPhoneHome(phoneHome)
-            .withPhoneMobile(phoneMobile).withPhoneWork(phoneWork).withAddress(address).withEmail2(email2).withPhoneWork(phoneWork).withEmail3(email3);
+            .withPhoneMobile(phoneMobile).withPhoneWork(phoneWork).withAddress(address).withEmail2(email2).withEmail3(email3);
   }
 }
