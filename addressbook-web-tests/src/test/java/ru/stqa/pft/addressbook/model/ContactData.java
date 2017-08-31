@@ -11,7 +11,7 @@ public class ContactData {
   private  String email2;
   private  String email3;
   private  String allEmails;
-
+  private  String allName;
 
   private  String address;
   private String group;
@@ -40,6 +40,7 @@ public class ContactData {
   public String getAllEmails() { return allEmails;  }
   public String getAddress() { return address;  }
   public String getAllPhone() { return allPhones;  }
+  public String getAllName() { return allName;  }
 
   public int getId() {    return id;  }
 
@@ -83,14 +84,6 @@ public class ContactData {
     public ContactData withAllEmails(String allEmails) {
     this.allEmails = allEmails;
     return this;}
-    public ContactData withAddress(String address) {
-    this.address = address;
-    return this;}
-
-
-
-
-
 
   @Override
   public String toString() {
@@ -105,11 +98,21 @@ public class ContactData {
             ", email2='" + email2 + '\'' +
             ", email3='" + email3 + '\'' +
             ", allEmails='" + allEmails + '\'' +
+            ", allName='" + allName + '\'' +
             ", address='" + address + '\'' +
             ", group='" + group + '\'' +
             ", id=" + id +
             '}';
   }
+
+  public ContactData withAllName(String allName) {
+    this.allName = allName;
+    return this;}
+    public ContactData withAddress(String address) {
+    this.address = address;
+    return this;}
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
