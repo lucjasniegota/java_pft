@@ -189,15 +189,18 @@ public class ContactHelper extends HelperBase {
             .withPhoneMobile(phoneMobile).withPhoneWork(phoneWork).withAddress(address).withEmail2(email2).withEmail3(email3);
   }
 
-  public ContactData infoFromInfForm(ContactData contact) {
+  public ContactData infoFromInfForm2(ContactData contact) {
     initContactInformationById(contact.getId());
   List<WebElement> cells = wd.findElements(By.xpath("//div/div[4]"));
     String allName = cells.get(0).getText();
     wd.navigate().back();
-
     return new ContactData().withId(contact.getId()).withAllName(allName);
-
   }
 
-
+  public ContactData infoFromInfForm (ContactData contact) {
+    initContactInformationById(contact.getId());
+    String allName = wd.findElement(By.xpath("//div/div[4]")).getText();
+    wd.navigate().back();
+    return new ContactData().withId(contact.getId()).withAllName(allName);
+  }
 }

@@ -22,15 +22,16 @@ public class ContactInformationTests extends TestBase {
     app.goTo().homePage();
     if (app.contact().all().size() == 0) {
       app.contact().create
-              (new ContactData().withFirstname("nowa").withLastname("nowa").withEmail("lucja@gmail.com").withGroup("test5"),
+              (new ContactData().withFirstname("nowa").withLastname("nowa").withEmail("lucja@gmail.com").withPhoneMobile("123")
+                              .withAddress("1address23").withGroup("test5"),
                       true);}
   }
 
   @Test
-  public void testContactPhone(){
+  public void testContactInformation(){
     app.goTo().homePage();
     ContactData contact = app.contact().all().iterator().next();;
-    ContactData contactInfoFromInfForm = app.contact().infoFromInfForm(contact);
+ ContactData contactInfoFromInfForm = app.contact().infoFromInfForm(contact);
     ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact);
     assertThat(merge1(contactInfoFromInfForm), equalTo(merge2(contactInfoFromEditForm)));
 
@@ -50,8 +51,8 @@ public class ContactInformationTests extends TestBase {
   }
 
   public static String cleaned (String data){
-    return data.replaceAll("\\s","").replaceAll("[W:]","")
-            .replaceAll("[H:]","").replaceAll("[M:]","");
+    return data.replaceAll("\\s","").replaceAll("W:","")
+            .replaceAll("H:","").replaceAll("M:","").replaceAll("Memberof:test5","");
   }
 }
 
