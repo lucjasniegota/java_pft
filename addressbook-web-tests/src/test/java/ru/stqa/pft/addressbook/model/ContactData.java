@@ -8,6 +8,12 @@ public class ContactData {
   private  String phoneMobile;
   private  String phoneWork;
   private  String allPhones;
+  private  String email2;
+  private  String email3;
+  private  String allEmails;
+
+
+  private  String address;
   private String group;
   private int id = Integer.MAX_VALUE;
 
@@ -26,23 +32,13 @@ public class ContactData {
   }
   public String getGroup() { return group;  }
 
-  @Override
-  public String toString() {
-    return "ContactData{" +
-            "firstname='" + firstname + '\'' +
-            ", lastname='" + lastname + '\'' +
-            ", email='" + email + '\'' +
-            ", phoneHome='" + phoneHome + '\'' +
-            ", phoneMobile='" + phoneMobile + '\'' +
-            ", phoneWork='" + phoneWork + '\'' +
-            ", group='" + group + '\'' +
-            ", id=" + id +
-            '}';
-  }
-
   public String getPhoneHome() { return phoneHome;  }
   public String getPhoneMobile() { return phoneMobile;  }
   public String getPhoneWork() { return phoneWork;  }
+  public String getEmail2() { return email2;  }
+  public String getEmail3() { return email3;  }
+  public String getAllEmails() { return allEmails;  }
+  public String getAddress() { return address;  }
   public String getAllPhone() { return allPhones;  }
 
   public int getId() {    return id;  }
@@ -75,10 +71,45 @@ public class ContactData {
     public ContactData withPhoneWork(String phoneWork) {
     this.phoneWork = phoneWork;
     return this;}
-    public ContactData withPhoneMobile(String phoneMobile) {
+  public ContactData withPhoneMobile(String phoneMobile) {
     this.phoneMobile = phoneMobile;
     return this;}
+    public ContactData withEmail2(String email2) {
+    this.phoneMobile = email2;
+    return this;}
+    public ContactData withEmail3(String email3) {
+    this.phoneMobile = email3;
+    return this;}
+    public ContactData withAllEmails(String allEmails) {
+    this.allEmails = allEmails;
+    return this;}
+    public ContactData withAddress(String address) {
+    this.address = address;
+    return this;}
 
+
+
+
+
+
+  @Override
+  public String toString() {
+    return "ContactData{" +
+            "firstname='" + firstname + '\'' +
+            ", lastname='" + lastname + '\'' +
+            ", email='" + email + '\'' +
+            ", phoneHome='" + phoneHome + '\'' +
+            ", phoneMobile='" + phoneMobile + '\'' +
+            ", phoneWork='" + phoneWork + '\'' +
+            ", allPhones='" + allPhones + '\'' +
+            ", email2='" + email2 + '\'' +
+            ", email3='" + email3 + '\'' +
+            ", allEmails='" + allEmails + '\'' +
+            ", address='" + address + '\'' +
+            ", group='" + group + '\'' +
+            ", id=" + id +
+            '}';
+  }
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
