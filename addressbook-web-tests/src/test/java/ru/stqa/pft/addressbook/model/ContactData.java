@@ -29,7 +29,6 @@ public class ContactData {
   private  String allEmails;
   @Expose
   private  String allName;
-  @Expose
   private File photo;
   @Expose
   private  String address;
