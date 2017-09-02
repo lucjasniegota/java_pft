@@ -3,8 +3,8 @@ package ru.stqa.pft.addressbook.generators;
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
 import com.beust.jcommander.ParameterException;
+import com.thoughtworks.xstream.XStream;
 import ru.stqa.pft.addressbook.model.ContactData;
-import ru.stqa.pft.addressbook.model.GroupData;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -16,7 +16,8 @@ import java.util.List;
 public class ContactDataGenerator {
   @Parameter(names = "-c", description = "Contact count")
   public int count;
-
+  @Parameter(names = "-d", description = "Data format")
+  public String format;
   @Parameter(names = "-f", description = "Target file")
   public String file;
 
@@ -32,11 +33,36 @@ public class ContactDataGenerator {
     generator.run();
   }
   private void run() throws IOException {
+
     List<ContactData> contacts = generateContacts(count);
-    save(contacts, new File(file));
+    if (format.equals("csv")){
+    saveAsCSF(contacts, new File(file));
+  }else    if (format.equals("xml")){
+      saveAsXML(contacts, new File(file));}
+    else if (format.equals("json")){
+        saveAsJSON(contacts, new File(file));}
+        else{
+        System.out.println("Nieznany format " + format);
+      }}
+
+
+  private void saveAsJSON(List<ContactData> contacts, File file) throws IOException {
+    XStream xstream = new XStream();
+    String xml = xstream.toXML(contacts);
+    Writer writer = new FileWriter(file);
+    writer.write(xml);
+    writer.close();
   }
 
-  private  void save(List<ContactData> contacts, File file) throws IOException {
+  private void saveAsXML(List<ContactData> contacts, File file) throws IOException {
+    XStream xstream = new XStream();
+    String xml = xstream.toXML(contacts);
+    Writer writer = new FileWriter(file);
+    writer.write(xml);
+    writer.close();
+  }
+
+  private  void saveAsCSF(List<ContactData> contacts, File file) throws IOException {
     System.out.println(new File(".").getAbsolutePath());
     Writer writer = new FileWriter(file);
     for(ContactData contact : contacts){
@@ -46,7 +72,7 @@ public class ContactDataGenerator {
               contact.getEmail3(), contact.getAddress(), contact.getGroup(), contact.getPhoneHome(),
               contact.getPhoneMobile(),  contact.getPhoneWork(), contact.getPhoto()));
 
-    }
+  }
     writer.close();
   }
 

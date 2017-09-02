@@ -1,0 +1,44 @@
+<list>
+  <ru.stqa.pft.addressbook.model.ContactData>
+    <firstname>Firstname 0</firstname>
+    <lastname>Lastname 0</lastname>
+    <email>email 0</email>
+    <phoneHome>home 0</phoneHome>
+    <phoneMobile>mobile 0</phoneMobile>
+    <phoneWork>work 0</phoneWork>
+    <email2>email2 0</email2>
+    <email3>email3 0</email3>
+    <photo>src\test\resources\hiszp.png</photo>
+    <address>adres 0</address>
+    <group>test5</group>
+    <id>2147483647</id>
+  </ru.stqa.pft.addressbook.model.ContactData>
+  <ru.stqa.pft.addressbook.model.ContactData>
+    <firstname>Firstname 1</firstname>
+    <lastname>Lastname 1</lastname>
+    <email>email 1</email>
+    <phoneHome>home 1</phoneHome>
+    <phoneMobile>mobile 1</phoneMobile>
+    <phoneWork>work 1</phoneWork>
+    <email2>email2 1</email2>
+    <email3>email3 1</email3>
+    <photo>src\test\resources\hiszp.png</photo>
+    <address>adres 1</address>
+    <group>test5</group>
+    <id>2147483647</id>
+  </ru.stqa.pft.addressbook.model.ContactData>
+  <ru.stqa.pft.addressbook.model.ContactData>
+    <firstname>Firstname 2</firstname>
+    <lastname>Lastname 2</lastname>
+    <email>email 2</email>
+    <phoneHome>home 2</phoneHome>
+    <phoneMobile>mobile 2</phoneMobile>
+    <phoneWork>work 2</phoneWork>
+    <email2>email2 2</email2>
+    <email3>email3 2</email3>
+    <photo>src\test\resources\hiszp.png</photo>
+    <address>adres 2</address>
+    <group>test5</group>
+    <id>2147483647</id>
+  </ru.stqa.pft.addressbook.model.ContactData>
+</list>
