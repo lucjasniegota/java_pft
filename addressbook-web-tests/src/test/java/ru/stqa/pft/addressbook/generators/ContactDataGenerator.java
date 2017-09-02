@@ -71,10 +71,9 @@ public class ContactDataGenerator {
     Writer writer = new FileWriter(file);
     for(ContactData contact : contacts){
       writer.write(String.format("%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s\n" , contact.getFirstname(), contact.getLastname(),
-              contact.getEmail(),
+              contact.getEmail(),contact.getPhoneHome(),contact.getPhoneMobile(),  contact.getPhoneWork(),
               contact.getEmail2(),
-              contact.getEmail3(), contact.getAddress(), contact.getGroup(), contact.getPhoneHome(),
-              contact.getPhoneMobile(),  contact.getPhoneWork(), contact.getPhoto()));
+              contact.getEmail3(),  contact.getPhoto(), contact.getAddress(), contact.getGroup()));
 
   }
     writer.close();
@@ -85,10 +84,9 @@ public class ContactDataGenerator {
     for (int i = 0; i < count; i++ ){
       File photo = new File("src/test/resources/hiszp.png");
       contacts.add(new ContactData().withFirstname(String.format("Firstname %s", i))
-              .withLastname(String.format("Lastname %s", i)).withEmail(String.format("email %s", i))
+              .withLastname(String.format("Lastname %s", i)).withEmail(String.format("email %s", i)).withPhoneHome(String.format("home %s", i)).withPhoneWork(String.format("work %s", i))
+              .withPhoneMobile(String.format("mobile %s", i))
               .withEmail2(String.format("email2 %s", i)).withEmail3(String.format("email3 %s", i))
-              .withPhoneHome(String.format("home %s", i)).withPhoneWork(String.format("work %s", i))
-              .withPhoneMobile(String.format("mobile %s", i)).withAddress(String.format("adres %s", i)).withGroup("test5")
-              .withPhoto(photo));
+                      .withPhoto(photo).withAddress(String.format("adres %s", i)).withGroup("test5"));
     }    return contacts;
 }}
