@@ -1,5 +1,7 @@
 package ru.stqa.pft.addressbook.model;
 
+import java.io.File;
+
 public class ContactData {
   private  String firstname;
   private  String lastname;
@@ -12,7 +14,7 @@ public class ContactData {
   private  String email3;
   private  String allEmails;
   private  String allName;
-
+  private File photo;
   private  String address;
   private String group;
   private int id = Integer.MAX_VALUE;
@@ -21,17 +23,12 @@ public class ContactData {
   public String getFirstname() {
     return firstname;
   }
-
-  public String getLastname() {
-    return lastname;
+  public String getLastname() {    return lastname;
   }
-
-
   public String getEmail() {
     return email;
   }
   public String getGroup() { return group;  }
-
   public String getPhoneHome() { return phoneHome;  }
   public String getPhoneMobile() { return phoneMobile;  }
   public String getPhoneWork() { return phoneWork;  }
@@ -41,49 +38,57 @@ public class ContactData {
   public String getAddress() { return address;  }
   public String getAllPhone() { return allPhones;  }
   public String getAllName() { return allName;  }
-
   public int getId() {    return id;  }
+  public File getPhoto() {    return photo;  }
 
+  public ContactData withPhoto(File photo) {
+    this.photo = photo;
+    return this;
+  }
   public ContactData withId(int id) {
     this.id = id;
     return this;
   }
-
   public ContactData withFirstname(String firstname) {
     this.firstname = firstname;
     return this;}
-
   public ContactData withLastname(String lastname) {
     this.lastname = lastname;
     return this;}
-
   public ContactData withEmail(String email) {
     this.email = email;
     return this;}
   public ContactData withAllPhone(String allPhones) {
     this.allPhones = allPhones;
     return this;}
-    public ContactData withGroup(String group) {
+  public ContactData withGroup(String group) {
     this.group = group;
     return this;}
-    public ContactData withPhoneHome(String phoneHome) {
+  public ContactData withPhoneHome(String phoneHome) {
     this.phoneHome = phoneHome;
     return this;}
-    public ContactData withPhoneWork(String phoneWork) {
+  public ContactData withPhoneWork(String phoneWork) {
     this.phoneWork = phoneWork;
     return this;}
   public ContactData withPhoneMobile(String phoneMobile) {
     this.phoneMobile = phoneMobile;
     return this;}
-    public ContactData withEmail2(String email2) {
+  public ContactData withEmail2(String email2) {
     this.email2 = email2;
     return this;}
-    public ContactData withEmail3(String email3) {
+  public ContactData withEmail3(String email3) {
     this.email3 = email3;
     return this;}
-    public ContactData withAllEmails(String allEmails) {
+  public ContactData withAllEmails(String allEmails) {
     this.allEmails = allEmails;
     return this;}
+  public ContactData withAllName(String allName) {
+    this.allName = allName;
+    return this;}
+  public ContactData withAddress(String address) {
+    this.address = address;
+    return this;}
+
 
   @Override
   public String toString() {
@@ -104,13 +109,6 @@ public class ContactData {
             ", id=" + id +
             '}';
   }
-
-  public ContactData withAllName(String allName) {
-    this.allName = allName;
-    return this;}
-    public ContactData withAddress(String address) {
-    this.address = address;
-    return this;}
 
 
   @Override

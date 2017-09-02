@@ -1,19 +1,15 @@
 package ru.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class ContactHelper extends HelperBase {
 
@@ -32,9 +28,13 @@ public class ContactHelper extends HelperBase {
     type(By.name("firstname"), contactData.getFirstname());
     type(By.name("lastname"), contactData.getLastname());
     type(By.name("email"), contactData.getEmail());
+    type(By.name("email2"), contactData.getEmail2());
+    type(By.name("email3"), contactData.getEmail3());
+    type(By.name("address"), contactData.getAddress());
     type(By.name("home"), contactData.getPhoneHome());
     type(By.name("mobile"), contactData.getPhoneMobile());
     type(By.name("work"), contactData.getPhoneWork());
+    attach(By.name("photo"), contactData.getPhoto());
     if (creation) {
       new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
     } else {
@@ -189,15 +189,8 @@ public class ContactHelper extends HelperBase {
             .withPhoneMobile(phoneMobile).withPhoneWork(phoneWork).withAddress(address).withEmail2(email2).withEmail3(email3);
   }
 
-  public ContactData infoFromInfForm2(ContactData contact) {
-    initContactInformationById(contact.getId());
-  List<WebElement> cells = wd.findElements(By.xpath("//div/div[4]"));
-    String allName = cells.get(0).getText();
-    wd.navigate().back();
-    return new ContactData().withId(contact.getId()).withAllName(allName);
-  }
 
-  public ContactData infoFromInfForm (ContactData contact) {
+  public ContactData infoFromInfForm(ContactData contact) {
     initContactInformationById(contact.getId());
     String allName = wd.findElement(By.xpath("//div/div[4]")).getText();
     wd.navigate().back();
