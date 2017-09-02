@@ -37,15 +37,16 @@ public class GroupDataGenerator {
 
   private void run() throws IOException {
     List<GroupData> groups = generateGroups(count);
-  if (format.equals("csv")){
-    saveAsCsv(groups, new File(file));}
-  else    if (format.equals("xml")){
-        saveAsXml(groups, new File(file));}
-        else    if (format.equals("json")){
-        saveAsJson(groups, new File(file));}
-        else{
+    if (format.equals("csv")) {
+      saveAsCsv(groups, new File(file));
+    } else if (format.equals("xml")) {
+      saveAsXml(groups, new File(file));
+    } else if (format.equals("json")) {
+      saveAsJson(groups, new File(file));
+    } else {
       System.out.println("Nieznany format " + format);
-    }}
+    }
+  }
 
   private void saveAsXml(List<GroupData> groups, File file) throws IOException {
     System.out.println(new File(".").getAbsolutePath());
@@ -56,6 +57,7 @@ public class GroupDataGenerator {
     writer.write(xml);
     writer.close();
   }
+
   private void saveAsJson(List<GroupData> groups, File file) throws IOException {
     Gson gson = new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create();
     String json = gson.toJson(groups);
@@ -63,6 +65,7 @@ public class GroupDataGenerator {
     writer.write(json);
     writer.close();
   }
+
   private void saveAsCsv(List<GroupData> groups, File file) throws IOException {
     System.out.println(new File(".").getAbsolutePath());
     Writer writer = new FileWriter(file);
@@ -72,7 +75,7 @@ public class GroupDataGenerator {
     writer.close();
   }
 
-  private  List<GroupData> generateGroups(int count)  {
+  private List<GroupData> generateGroups(int count) {
     List<GroupData> groups = new ArrayList<GroupData>();
     for (int i = 0; i < count; i++) {
       groups.add(new GroupData().withName(String.format("test5"))

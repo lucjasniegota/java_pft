@@ -13,10 +13,14 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ContactPhoneTests extends TestBase {
 
+  public static String cleaned(String phone) {
+    return phone.replaceAll("\\s", "").replaceAll("[-()]", "");
+  }
+
   @BeforeMethod
-  public void ensurePreconditions(){
+  public void ensurePreconditions() {
     app.goTo().groupPage();
-    if (app.group().all().size() ==0){
+    if (app.group().all().size() == 0) {
       app.group().create(new GroupData().withName("test5"));
     }
     app.goTo().homePage();
@@ -24,11 +28,12 @@ public class ContactPhoneTests extends TestBase {
       app.contact().create
               (new ContactData().withFirstname("nowa").withLastname("nowa").withEmail("lucja@gmail.com").withGroup("test5")
                               .withPhoneHome("667888").withPhoneMobile("123214").withPhoneWork("4324243"),
-                      true);}
+                      true);
+    }
   }
 
   @Test
-  public void testContactPhone(){
+  public void testContactPhone() {
     app.goTo().homePage();
     ContactData contact = app.contact().all().iterator().next();
     ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact);
@@ -37,12 +42,7 @@ public class ContactPhoneTests extends TestBase {
   }
 
   private String mergePhones(ContactData contact) {
-    return Arrays.asList(contact.getPhoneHome(),contact.getPhoneMobile(),contact.getPhoneWork())
-            .stream().filter((s) ->!s.equals("")).map(ContactPhoneTests::cleaned).collect(Collectors.joining("\n"));
-  }
-
-
-  public static String cleaned (String phone){
-    return phone.replaceAll("\\s","").replaceAll("[-()]","");
+    return Arrays.asList(contact.getPhoneHome(), contact.getPhoneMobile(), contact.getPhoneWork())
+            .stream().filter((s) -> !s.equals("")).map(ContactPhoneTests::cleaned).collect(Collectors.joining("\n"));
   }
 }

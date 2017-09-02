@@ -1,41 +1,41 @@
 <list>
   <contact>
-    <firstname>Firstname 0</firstname>
-    <lastname>Lastname 0</lastname>
+    <firstname>Firstname0</firstname>
+    <lastname>Lastname0</lastname>
     <email>email 0</email>
-    <phoneHome>home 0</phoneHome>
-    <phoneMobile>mobile 0</phoneMobile>
-    <phoneWork>work 0</phoneWork>
-    <email2>email2 0</email2>
-    <email3>email3 0</email3>
+    <phoneHome>home0</phoneHome>
+    <phoneMobile>mobile0</phoneMobile>
+    <phoneWork>work0</phoneWork>
+    <email2>email20</email2>
+    <email3>email30</email3>
     <photo>src\test\resources\hiszp.png</photo>
-    <address>adres 0</address>
+    <address>adres0</address>
     <group>test5</group>
   </contact>
   <contact>
-    <firstname>Firstname 1</firstname>
-    <lastname>Lastname 1</lastname>
+    <firstname>Firstname1</firstname>
+    <lastname>Lastname1</lastname>
     <email>email 1</email>
-    <phoneHome>home 1</phoneHome>
-    <phoneMobile>mobile 1</phoneMobile>
-    <phoneWork>work 1</phoneWork>
-    <email2>email2 1</email2>
-    <email3>email3 1</email3>
+    <phoneHome>home1</phoneHome>
+    <phoneMobile>mobile1</phoneMobile>
+    <phoneWork>work1</phoneWork>
+    <email2>email21</email2>
+    <email3>email31</email3>
     <photo>src\test\resources\hiszp.png</photo>
-    <address>adres 1</address>
+    <address>adres1</address>
     <group>test5</group>
   </contact>
   <contact>
-    <firstname>Firstname 2</firstname>
-    <lastname>Lastname 2</lastname>
+    <firstname>Firstname2</firstname>
+    <lastname>Lastname2</lastname>
     <email>email 2</email>
-    <phoneHome>home 2</phoneHome>
-    <phoneMobile>mobile 2</phoneMobile>
-    <phoneWork>work 2</phoneWork>
-    <email2>email2 2</email2>
-    <email3>email3 2</email3>
+    <phoneHome>home2</phoneHome>
+    <phoneMobile>mobile2</phoneMobile>
+    <phoneWork>work2</phoneWork>
+    <email2>email22</email2>
+    <email3>email32</email3>
     <photo>src\test\resources\hiszp.png</photo>
-    <address>adres 2</address>
+    <address>adres2</address>
     <group>test5</group>
   </contact>
 </list>

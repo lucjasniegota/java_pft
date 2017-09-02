@@ -14,18 +14,23 @@ public class GroupData {
   private String footer;
   @XStreamOmitField
   private int id = Integer.MAX_VALUE;
-  public int getId() {    return id;
+
+  public int getId() {
+    return id;
   }
 
   public String getHeader() {
     return header;
   }
+
   public String getFooter() {
     return footer;
   }
+
   public String getName() {
     return name;
   }
+
   public GroupData withId(int id) {
     this.id = id;
     return this;

@@ -23,7 +23,7 @@ public class ContactDataGenerator {
   @Parameter(names = "-f", description = "Target file")
   public String file;
 
-  public static void main (String [] args) throws IOException {
+  public static void main(String[] args) throws IOException {
     ContactDataGenerator generator = new ContactDataGenerator();
     JCommander jcommander = new JCommander(generator);
     try {
@@ -34,18 +34,20 @@ public class ContactDataGenerator {
     }
     generator.run();
   }
+
   private void run() throws IOException {
 
     List<ContactData> contacts = generateContacts(count);
-    if (format.equals("csv")){
-    saveAsCSF(contacts, new File(file));
-  }else    if (format.equals("xml")){
-      saveAsXML(contacts, new File(file));}
-    else if (format.equals("json")){
-        saveAsJSON(contacts, new File(file));}
-        else{
-        System.out.println("Nieznany format " + format);
-      }}
+    if (format.equals("csv")) {
+      saveAsCSF(contacts, new File(file));
+    } else if (format.equals("xml")) {
+      saveAsXML(contacts, new File(file));
+    } else if (format.equals("json")) {
+      saveAsJSON(contacts, new File(file));
+    } else {
+      System.out.println("Nieznany format " + format);
+    }
+  }
 
 
   private void saveAsJSON(List<ContactData> contacts, File file) throws IOException {
@@ -66,27 +68,29 @@ public class ContactDataGenerator {
 
   }
 
-  private  void saveAsCSF(List<ContactData> contacts, File file) throws IOException {
+  private void saveAsCSF(List<ContactData> contacts, File file) throws IOException {
     System.out.println(new File(".").getAbsolutePath());
     Writer writer = new FileWriter(file);
-    for(ContactData contact : contacts){
-      writer.write(String.format("%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s\n" , contact.getFirstname(), contact.getLastname(),
-              contact.getEmail(),contact.getPhoneHome(),contact.getPhoneMobile(),  contact.getPhoneWork(),
+    for (ContactData contact : contacts) {
+      writer.write(String.format("%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s\n", contact.getFirstname(), contact.getLastname(),
+              contact.getEmail(), contact.getPhoneHome(), contact.getPhoneMobile(), contact.getPhoneWork(),
               contact.getEmail2(),
-              contact.getEmail3(),  contact.getPhoto(), contact.getAddress(), contact.getGroup()));
+              contact.getEmail3(), contact.getPhoto(), contact.getAddress(), contact.getGroup()));
 
-  }
+    }
     writer.close();
   }
 
-  private  List<ContactData> generateContacts(int count) {
+  private List<ContactData> generateContacts(int count) {
     List<ContactData> contacts = new ArrayList<ContactData>();
-    for (int i = 0; i < count; i++ ){
+    for (int i = 0; i < count; i++) {
       File photo = new File("src/test/resources/hiszp.png");
-      contacts.add(new ContactData().withFirstname(String.format("Firstname %s", i))
-              .withLastname(String.format("Lastname %s", i)).withEmail(String.format("email %s", i)).withPhoneHome(String.format("home %s", i)).withPhoneWork(String.format("work %s", i))
-              .withPhoneMobile(String.format("mobile %s", i))
-              .withEmail2(String.format("email2 %s", i)).withEmail3(String.format("email3 %s", i))
-                      .withPhoto(photo).withAddress(String.format("adres %s", i)).withGroup("test5"));
-    }    return contacts;
-}}
+      contacts.add(new ContactData().withFirstname(String.format("Firstname%s", i))
+              .withLastname(String.format("Lastname%s", i)).withEmail(String.format("email%s", i)).withPhoneHome(String.format("home%s", i)).withPhoneWork(String.format("work%s", i))
+              .withPhoneMobile(String.format("mobile%s", i))
+              .withEmail2(String.format("email2%s", i)).withEmail3(String.format("email3%s", i))
+              .withPhoto(photo).withAddress(String.format("adres%s", i)).withGroup("test5"));
+    }
+    return contacts;
+  }
+}

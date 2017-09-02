@@ -13,10 +13,15 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ContactInformationTests extends TestBase {
 
+  public static String cleaned(String data) {
+    return data.replaceAll("\\s", "").replaceAll("W:", "")
+            .replaceAll("H:", "").replaceAll("M:", "").replaceAll("Memberof:test5", "");
+  }
+
   @BeforeMethod
-  public void ensurePreconditions(){
+  public void ensurePreconditions() {
     app.goTo().groupPage();
-    if (app.group().all().size() ==0){
+    if (app.group().all().size() == 0) {
       app.group().create(new GroupData().withName("test5"));
     }
     app.goTo().homePage();
@@ -24,35 +29,34 @@ public class ContactInformationTests extends TestBase {
       app.contact().create
               (new ContactData().withFirstname("nowa").withLastname("nowa").withEmail("lucja@gmail.com").withPhoneMobile("123")
                               .withAddress("1address23").withGroup("test5"),
-                      true);}
+                      true);
+    }
   }
 
   @Test
-  public void testContactInformation(){
+  public void testContactInformation() {
     app.goTo().homePage();
-    ContactData contact = app.contact().all().iterator().next();;
- ContactData contactInfoFromInfForm = app.contact().infoFromInfForm(contact);
+    ContactData contact = app.contact().all().iterator().next();
+    ;
+    ContactData contactInfoFromInfForm = app.contact().infoFromInfForm(contact);
     ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact);
     assertThat(merge1(contactInfoFromInfForm), equalTo(merge2(contactInfoFromEditForm)));
 
   }
+
   private String merge1(ContactData contact) {
-   return Arrays.asList(contact.getAllName())
-         .stream().filter((s) ->!s.equals("")).map(ContactInformationTests::cleaned).collect(Collectors.joining(""));
+    return Arrays.asList(contact.getAllName())
+            .stream().filter((s) -> !s.equals("")).map(ContactInformationTests::cleaned).collect(Collectors.joining(""));
 
 
   }
+
   private String merge2(ContactData contact) {
-    return Arrays.asList(contact.getFirstname(), contact.getLastname(),contact.getAddress(),
-            contact.getPhoneHome(),contact.getPhoneMobile(),contact.getPhoneWork()
-            ,contact.getEmail(),contact.getEmail2(),contact.getEmail3()).stream()
-            .filter((c) ->!c.equals("")).map(ContactInformationTests::cleaned).collect(Collectors.joining(""));
+    return Arrays.asList(contact.getFirstname(), contact.getLastname(), contact.getAddress(),
+            contact.getPhoneHome(), contact.getPhoneMobile(), contact.getPhoneWork()
+            , contact.getEmail(), contact.getEmail2(), contact.getEmail3()).stream()
+            .filter((c) -> !c.equals("")).map(ContactInformationTests::cleaned).collect(Collectors.joining(""));
 
-  }
-
-  public static String cleaned (String data){
-    return data.replaceAll("\\s","").replaceAll("W:","")
-            .replaceAll("H:","").replaceAll("M:","").replaceAll("Memberof:test5","");
   }
 }
 

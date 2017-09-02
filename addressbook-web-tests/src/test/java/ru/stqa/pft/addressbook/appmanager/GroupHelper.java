@@ -9,8 +9,10 @@ import ru.stqa.pft.addressbook.model.Groups;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GroupHelper extends HelperBase{
-  public GroupHelper(WebDriver wd){
+public class GroupHelper extends HelperBase {
+  private Groups groupCache = null;
+
+  public GroupHelper(WebDriver wd) {
 
     super(wd);
   }
@@ -58,6 +60,7 @@ public class GroupHelper extends HelperBase{
     groupCache = null;
     returnGroupPage();
   }
+
   public void modify(GroupData group) {
     selectGroupById(group.getId());
     initGroupModification();
@@ -71,19 +74,15 @@ public class GroupHelper extends HelperBase{
     selectGroupById(group.getId());
     deleteGroup();
     groupCache = null;
-    returnGroupPage();}
-
-  private void selectGroupById(int id) {
-    wd.findElement(By.cssSelector("input[value = '"+ id +"'] ")).click();
+    returnGroupPage();
   }
 
-
-
-
-  private Groups groupCache = null;
+  private void selectGroupById(int id) {
+    wd.findElement(By.cssSelector("input[value = '" + id + "'] ")).click();
+  }
 
   public Groups all() {
-    if (groupCache !=null) {
+    if (groupCache != null) {
       return new Groups(groupCache);
     }
     groupCache = new Groups();
@@ -95,8 +94,6 @@ public class GroupHelper extends HelperBase{
     }
     return new Groups(groupCache);
   }
-
-
 
 
   public List<GroupData> list() {
@@ -116,6 +113,7 @@ public class GroupHelper extends HelperBase{
     deleteGroup();
     returnGroupPage();
   }
+
   public boolean isThereAGroup() {
     return isElementPresent(By.name("selected[]"));
   }
@@ -130,4 +128,5 @@ public class GroupHelper extends HelperBase{
     fillGroupForm(group);
     submitGroupModification();
     returnGroupPage();
-  }}
+  }
+}

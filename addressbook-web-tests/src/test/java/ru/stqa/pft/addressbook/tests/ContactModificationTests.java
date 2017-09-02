@@ -9,23 +9,24 @@ import ru.stqa.pft.addressbook.model.GroupData;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class ContactModificationTests extends TestBase{
+public class ContactModificationTests extends TestBase {
 
   @BeforeMethod
-  public void ensurePreconditions(){
+  public void ensurePreconditions() {
     app.goTo().groupPage();
-    if (app.group().all().size() ==0){
+    if (app.group().all().size() == 0) {
       app.group().create(new GroupData().withName("test5"));
     }
     app.goTo().homePage();
     if (app.contact().all().size() == 0) {
       app.contact().create
               (new ContactData().withFirstname("nowa").withLastname("nowa").withEmail("lucja@gmail.com").withGroup("test5"),
-                      true);}
+                      true);
+    }
   }
 
   @Test
- public void testContactModification(){
+  public void testContactModification() {
 
     Contacts before = app.contact().all();
     ContactData modifiedContact = before.iterator().next();
