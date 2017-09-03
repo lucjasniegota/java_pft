@@ -25,7 +25,7 @@ public class GroupCreationTests extends TestBase {
   @DataProvider
   public Iterator<Object[]> validGroupsfromJSON() throws IOException {
     List<Object[]> list = new ArrayList<Object[]>();
-    BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/groups.json")));
+    BufferedReader reader = new BufferedReader(new FileReader(new File(app.properties.getProperty("web.groupFileJSON"))));
     String json = "";
     String line = reader.readLine();
     while (line != null) {
@@ -38,10 +38,10 @@ public class GroupCreationTests extends TestBase {
     return groups.stream().map((g) -> new Object[]{g}).collect(Collectors.toList()).iterator();
   }
 
-
+  @DataProvider
   public Iterator<Object[]> validGroupsfromXML() throws IOException {
     List<Object[]> list = new ArrayList<Object[]>();
-    BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/groups.xml")));
+    BufferedReader reader = new BufferedReader(new FileReader(new File(app.properties.getProperty("web.groupFileXML"))));
     String xml = "";
     String line = reader.readLine();
     while (line != null) {
@@ -53,10 +53,10 @@ public class GroupCreationTests extends TestBase {
     List<GroupData> groups = (List<GroupData>) xstream.fromXML(xml);
     return groups.stream().map((g) -> new Object[]{g}).collect(Collectors.toList()).iterator();
   }
-
+  @DataProvider
   public Iterator<Object[]> validGroupsfromCSV() throws IOException {
     List<Object[]> list = new ArrayList<Object[]>();
-    BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/groups.csv")));
+    BufferedReader reader = new BufferedReader(new FileReader(new File(app.properties.getProperty("web.groupFileCSV"))));
     String line = reader.readLine();
     while (line != null) {
       String[] split = line.split(";");
@@ -66,7 +66,7 @@ public class GroupCreationTests extends TestBase {
     return list.iterator();
   }
 
-  @Test(dataProvider = "validGroupsfromJSON")
+  @Test(dataProvider = "validGroupsfromXML")
   public void testGroupCreation(GroupData group) {
     app.goTo().groupPage();
     Groups before = app.group().all();
@@ -80,7 +80,7 @@ public class GroupCreationTests extends TestBase {
   public void testBadGroupCreation() {
     app.goTo().groupPage();
     Groups before = app.group().all();
-    GroupData group = new GroupData().withName("'test5");
+    GroupData group = new GroupData().withName(app.properties.getProperty("web.badGroupName"));
     app.group().create(group);
     assertThat(app.group().count(), equalTo(before.size()));
     Groups after = app.group().all();

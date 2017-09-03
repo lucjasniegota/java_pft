@@ -28,14 +28,14 @@ public class ContactCreationTests extends TestBase {
   public void ensurePreconditions() {
     app.goTo().groupPage();
     if (app.group().all().size() == 0) {
-      app.group().create(new GroupData().withName("test5"));
+      app.group().create(new GroupData().withName(app.properties.getProperty("web.groupName")));
     }
   }
 
   @DataProvider
   public Iterator<Object[]> validContactsfromJSON() throws IOException {
     List<Object[]> list = new ArrayList<Object[]>();
-    BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/contacts.json")));
+    BufferedReader reader = new BufferedReader(new FileReader(new File(app.properties.getProperty("web.contactFileJSON"))));
     String json = "";
     String line = reader.readLine();
     while (line != null) {
@@ -51,7 +51,7 @@ public class ContactCreationTests extends TestBase {
 
   public Iterator<Object[]> validContactsfromXML() throws IOException {
     List<Object[]> list = new ArrayList<Object[]>();
-    BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/contacts.xml")));
+   BufferedReader reader = new BufferedReader(new FileReader(new File(app.properties.getProperty("web.contactFileXML"))));
     String xml = "";
     String line = reader.readLine();
     while (line != null) {
@@ -66,7 +66,7 @@ public class ContactCreationTests extends TestBase {
 
   public Iterator<Object[]> validContactsfromCSV() throws IOException {
     List<Object[]> list = new ArrayList<Object[]>();
-    BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/contacts.xml")));
+BufferedReader reader = new BufferedReader(new FileReader(new File(app.properties.getProperty("web.contactFileCSV"))));
     String line = reader.readLine();
     while (line != null) {
       String[] split = line.split(";");
@@ -76,8 +76,8 @@ public class ContactCreationTests extends TestBase {
               .withAddress(split[9]).withGroup(split[10])});
       line = reader.readLine();
     }
-    return list.iterator();
-  }
+    return list.iterator();}
+
 
   @Test(dataProvider = "validContactsfromJSON")
   public void testContactCreation(ContactData contact) {

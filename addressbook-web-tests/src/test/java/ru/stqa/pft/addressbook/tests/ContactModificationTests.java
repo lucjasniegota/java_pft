@@ -6,32 +6,56 @@ import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.GroupData;
 
+import java.io.File;
+
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ContactModificationTests extends TestBase {
 
+
   @BeforeMethod
   public void ensurePreconditions() {
     app.goTo().groupPage();
     if (app.group().all().size() == 0) {
-      app.group().create(new GroupData().withName("test5"));
+      app.group().create(new GroupData().withName(app.properties.getProperty("web.groupName")));
     }
     app.goTo().homePage();
     if (app.contact().all().size() == 0) {
+      File photo = new File(app.properties.getProperty("web.contactPhoto"));
       app.contact().create
-              (new ContactData().withFirstname("nowa").withLastname("nowa").withEmail("lucja@gmail.com").withGroup("test5"),
+              (new ContactData().withFirstname(app.properties.getProperty("web.contactFirstname"))
+                              .withLastname(app.properties.getProperty("web.contactLastname"))
+                              .withEmail(app.properties.getProperty("web.contactEmail"))
+                              .withGroup(app.properties.getProperty("web.groupName"))
+                              .withPhoneHome(app.properties.getProperty("web.contactHome"))
+                              .withPhoneMobile(app.properties.getProperty("web.contactMobile"))
+                              .withPhoneWork(app.properties.getProperty("web.contactWork"))
+                              .withAddress(app.properties.getProperty("web.contactAddress"))
+                              .withEmail2(app.properties.getProperty("web.contactEmail2"))
+                              .withEmail3(app.properties.getProperty("web.contactEmail3"))
+                              .withPhoto(photo),
                       true);
     }
   }
 
   @Test
   public void testContactModification() {
-
+    File photoModify = new File(app.properties.getProperty("web.contactPhotoModify"));
     Contacts before = app.contact().all();
     ContactData modifiedContact = before.iterator().next();
     ContactData contact =
-            new ContactData().withId(modifiedContact.getId()).withFirstname("nr 1111").withLastname("nr 2222").withEmail("zz@zzmmz.com");
+            new ContactData().withId(modifiedContact.getId()).withFirstname(app.properties.getProperty("web.contactFirstnameModify"))
+                    .withLastname(app.properties.getProperty("web.contactLastnameModify"))
+                    .withEmail(app.properties.getProperty("web.contactEmailModify"))
+                    .withGroup(app.properties.getProperty("web.groupNameModify"))
+                    .withPhoneHome(app.properties.getProperty("web.contactHomeModify"))
+                    .withPhoneMobile(app.properties.getProperty("web.contactMobileModify"))
+                    .withPhoneWork(app.properties.getProperty("web.contactWorkModify"))
+                    .withAddress(app.properties.getProperty("web.contactAddressModify"))
+                    .withEmail2(app.properties.getProperty("web.contactEmail2Modify"))
+                    .withEmail3(app.properties.getProperty("web.contactEmail3Modify"))
+                    .withPhoto(photoModify);
     app.contact().modify(contact);
     assertThat(app.contact().count(), equalTo(before.size()));
     Contacts after = app.contact().all();

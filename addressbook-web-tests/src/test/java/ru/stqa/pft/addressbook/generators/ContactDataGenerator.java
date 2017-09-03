@@ -53,32 +53,30 @@ public class ContactDataGenerator {
   private void saveAsJSON(List<ContactData> contacts, File file) throws IOException {
     Gson gson = new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create();
     String json = gson.toJson(contacts);
-    Writer writer = new FileWriter(file);
-    writer.write(json);
-    writer.close();
+    try (Writer writer = new FileWriter(file)) {
+      writer.write(json);
+    }
   }
 
   private void saveAsXML(List<ContactData> contacts, File file) throws IOException {
     XStream xstream = new XStream();
     xstream.processAnnotations(ContactData.class);
     String xml = xstream.toXML(contacts);
-    Writer writer = new FileWriter(file);
-    writer.write(xml);
-    writer.close();
+    try (Writer writer = new FileWriter(file)) {
+      writer.write(xml);
+    }
 
   }
 
   private void saveAsCSF(List<ContactData> contacts, File file) throws IOException {
     System.out.println(new File(".").getAbsolutePath());
-    Writer writer = new FileWriter(file);
+    try (Writer writer = new FileWriter(file)){
     for (ContactData contact : contacts) {
       writer.write(String.format("%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s\n", contact.getFirstname(), contact.getLastname(),
               contact.getEmail(), contact.getPhoneHome(), contact.getPhoneMobile(), contact.getPhoneWork(),
               contact.getEmail2(),
               contact.getEmail3(), contact.getPhoto(), contact.getAddress(), contact.getGroup()));
-
-    }
-    writer.close();
+    }}
   }
 
   private List<ContactData> generateContacts(int count) {
@@ -86,10 +84,16 @@ public class ContactDataGenerator {
     for (int i = 0; i < count; i++) {
       File photo = new File("src/test/resources/hiszp.png");
       contacts.add(new ContactData().withFirstname(String.format("Firstname%s", i))
-              .withLastname(String.format("Lastname%s", i)).withEmail(String.format("email%s", i)).withPhoneHome(String.format("home%s", i)).withPhoneWork(String.format("work%s", i))
+              .withLastname(String.format("Lastname%s", i))
+              .withEmail(String.format("email%s", i))
+              .withPhoneHome(String.format("home%s", i))
+              .withPhoneWork(String.format("work%s", i))
               .withPhoneMobile(String.format("mobile%s", i))
-              .withEmail2(String.format("email2%s", i)).withEmail3(String.format("email3%s", i))
-              .withPhoto(photo).withAddress(String.format("adres%s", i)).withGroup("test5"));
+              .withEmail2(String.format("email2%s", i))
+              .withEmail3(String.format("email3%s", i))
+              .withPhoto(photo)
+              .withAddress(String.format("adres%s", i))
+              .withGroup("test5"));
     }
     return contacts;
   }

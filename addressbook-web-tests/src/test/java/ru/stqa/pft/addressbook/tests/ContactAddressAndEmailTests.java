@@ -19,12 +19,18 @@ public class ContactAddressAndEmailTests extends TestBase {
   public void ensurePreconditions() {
     app.goTo().groupPage();
     if (app.group().all().size() == 0) {
-      app.group().create(new GroupData().withName("test5"));
+      app.group().create(new GroupData().withName(app.properties.getProperty("web.groupName")));
     }
     app.goTo().homePage();
     if (app.contact().all().size() == 0) {
       app.contact().create
-              (new ContactData().withFirstname("nowa").withLastname("nowa").withEmail("lucja@gmail.com").withGroup("test5"),
+              (new ContactData().withFirstname(app.properties.getProperty("web.contactFirstname"))
+                              .withLastname(app.properties.getProperty("web.contactLastname"))
+                              .withEmail(app.properties.getProperty("web.contactEmail"))
+                              .withGroup(app.properties.getProperty("web.groupName"))
+                               .withAddress(app.properties.getProperty("web.contactAddress"))
+                               .withEmail2(app.properties.getProperty("web.contactEmail2"))
+                               .withEmail3(app.properties.getProperty("web.contactEmail3")),
                       true);
     }
   }
