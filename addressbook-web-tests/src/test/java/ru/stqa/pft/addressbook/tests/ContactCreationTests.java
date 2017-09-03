@@ -79,7 +79,7 @@ BufferedReader reader = new BufferedReader(new FileReader(new File(app.propertie
     return list.iterator();}
 
 
-  @Test(dataProvider = "validContactsfromJSON")
+  @Test(dataProvider = "validContactsfromXML")
   public void testContactCreation(ContactData contact) {
     app.goTo().homePage();
     Contacts before = app.contact().all();

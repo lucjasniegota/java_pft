@@ -65,7 +65,6 @@ public class ContactDataGenerator {
     try (Writer writer = new FileWriter(file)) {
       writer.write(xml);
     }
-
   }
 
   private void saveAsCSF(List<ContactData> contacts, File file) throws IOException {
