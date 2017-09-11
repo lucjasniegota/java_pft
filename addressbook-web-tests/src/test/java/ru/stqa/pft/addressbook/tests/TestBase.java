@@ -30,11 +30,11 @@ public class TestBase {
 
   @BeforeMethod
   public void logTestStar(Method m, Object[] p ){
-    logger.info("start test " + m.getName()+ "par " + Arrays.asList(p));
+    logger.info("start test " + m.getName()+ " par " + Arrays.asList(p));
   }
 
   @AfterMethod (alwaysRun = true)
   public void logTestStop(Method m, Object[] p){
-    logger.info("start test " + m.getName()+ "par" +  Arrays.asList(p));
+    logger.info("start test " + m.getName()+ " par " +  Arrays.asList(p));
   }
 }
