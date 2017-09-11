@@ -3,39 +3,67 @@ package ru.stqa.pft.addressbook.model;
 import com.google.gson.annotations.Expose;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
+import org.hibernate.annotations.Type;
 
+import javax.persistence.*;
 import java.io.File;
 
 @XStreamAlias("contact")
+@Entity
+@Table (name = "addressbook")
 public class ContactData {
   @Expose
+  @Column(name = "firstname")
   private String firstname;
   @Expose
+  @Column(name = "lastname")
   private String lastname;
   @Expose
+  @Column(name = "email")
+  @Type(type = "text")
   private String email;
   @Expose
+  @Column(name = "home")
+  @Type(type = "text")
   private String phoneHome;
   @Expose
+  @Type(type = "text")
+  @Column(name = "mobile")
   private String phoneMobile;
   @Expose
+  @Type(type = "text")
+  @Column(name = "work")
   private String phoneWork;
   @Expose
+  @Transient
   private String allPhones;
   @Expose
+  @Column(name = "email2")
+  @Type(type = "text")
   private String email2;
   @Expose
+  @Column(name = "email3")
+  @Type(type = "text")
   private String email3;
   @Expose
+  @Transient
   private String allEmails;
+  @Transient
   @Expose
   private String allName;
-  private File photo;
+  @Column(name = "photo")
+  @Type(type = "text")
+  private String photo;
   @Expose
+  @Column(name = "address")
+  @Type(type = "text")
   private String address;
+  @Transient
   @Expose
   private String group;
   @XStreamOmitField
+  @Id
+  @Column(name = "id")
   private int id = Integer.MAX_VALUE;
 
 
@@ -92,7 +120,7 @@ public class ContactData {
   }
 
   public File getPhoto() {
-    return photo;
+    return new File(photo);
   }
 
   public String getGroup() {
@@ -105,15 +133,6 @@ public class ContactData {
     return "ContactData{" +
             "firstname='" + firstname + '\'' +
             ", lastname='" + lastname + '\'' +
-            ", email='" + email + '\'' +
-            ", phoneHome='" + phoneHome + '\'' +
-            ", phoneMobile='" + phoneMobile + '\'' +
-            ", phoneWork='" + phoneWork + '\'' +
-            ", email2='" + email2 + '\'' +
-            ", email3='" + email3 + '\'' +
-            ", photo=" + photo +
-            ", address='" + address + '\'' +
-            ", group='" + group + '\'' +
             ", id=" + id +
             '}';
   }
@@ -179,7 +198,7 @@ public class ContactData {
   }
 
   public ContactData withPhoto(File photo) {
-    this.photo = photo;
+    this.photo = photo.getPath();
     return this;
   }
 
