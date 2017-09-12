@@ -16,12 +16,12 @@ public class ContactModificationTests extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
-    app.goTo().groupPage();
-    if (app.group().all().size() == 0) {
+    if (app.db().groups().size() == 0) {
+      app.goTo().groupPage();
       app.group().create(new GroupData().withName(app.properties.getProperty("web.groupName")));
     }
-    app.goTo().homePage();
-    if (app.contact().all().size() == 0) {
+    if (app.db().contacts().size() == 0) {
+      app.goTo().homePage();
       File photo = new File(app.properties.getProperty("web.contactPhoto"));
       app.contact().create
               (new ContactData().withFirstname(app.properties.getProperty("web.contactFirstname"))
@@ -42,7 +42,7 @@ public class ContactModificationTests extends TestBase {
   @Test
   public void testContactModification() {
     File photoModify = new File(app.properties.getProperty("web.contactPhotoModify"));
-    Contacts before = app.contact().all();
+    Contacts before = app.db().contacts();
     ContactData modifiedContact = before.iterator().next();
     ContactData contact =
             new ContactData().withId(modifiedContact.getId()).withFirstname(app.properties.getProperty("web.contactFirstnameModify"))
@@ -56,9 +56,10 @@ public class ContactModificationTests extends TestBase {
                     .withEmail2(app.properties.getProperty("web.contactEmail2Modify"))
                     .withEmail3(app.properties.getProperty("web.contactEmail3Modify"))
                     .withPhoto(photoModify);
+    app.goTo().homePage();
     app.contact().modify(contact);
     assertThat(app.contact().count(), equalTo(before.size()));
-    Contacts after = app.contact().all();
+    Contacts after = app.db().contacts();
     assertThat(after, equalTo(before.without(modifiedContact).withAdded(contact)));
   }
 

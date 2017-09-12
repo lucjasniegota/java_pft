@@ -26,13 +26,13 @@ public class ContactCreationTests extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
-    app.goTo().groupPage();
-    if (app.group().all().size() == 0) {
+    if (app.db().groups().size() == 0) {
+      app.goTo().groupPage();
       app.group().create(new GroupData().withName(app.properties.getProperty("web.groupName")));
     }
   }
 
-  @DataProvider
+
   public Iterator<Object[]> validContactsfromJSON() throws IOException {
     List<Object[]> list = new ArrayList<Object[]>();
     BufferedReader reader = new BufferedReader(new FileReader(new File(app.properties.getProperty("web.contactFileJSON"))));
@@ -48,7 +48,7 @@ public class ContactCreationTests extends TestBase {
     return contacts.stream().map((g) -> new Object[]{g}).collect(Collectors.toList()).iterator();
   }
 
-
+  @DataProvider
   public Iterator<Object[]> validContactsfromXML() throws IOException {
     List<Object[]> list = new ArrayList<Object[]>();
    BufferedReader reader = new BufferedReader(new FileReader(new File(app.properties.getProperty("web.contactFileXML"))));
@@ -82,10 +82,10 @@ BufferedReader reader = new BufferedReader(new FileReader(new File(app.propertie
   @Test(dataProvider = "validContactsfromXML")
   public void testContactCreation(ContactData contact) {
     app.goTo().homePage();
-    Contacts before = app.contact().all();
+    Contacts before = app.db().contacts();
     app.contact().create(contact, true);
     assertThat(app.contact().count(), equalTo(before.size() + 1));
-    Contacts after = app.contact().all();
+    Contacts after = app.db().contacts();
     assertThat(after, equalTo(before.withAdded(contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
   }
 

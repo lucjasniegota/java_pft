@@ -17,12 +17,12 @@ public class ContactAddressAndEmailTests extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
-    app.goTo().groupPage();
-    if (app.group().all().size() == 0) {
+    if (app.db().groups().size() == 0) {
+      app.goTo().groupPage();
       app.group().create(new GroupData().withName(app.properties.getProperty("web.groupName")));
     }
-    app.goTo().homePage();
-    if (app.contact().all().size() == 0) {
+    if (app.db().contacts().size() == 0) {
+      app.goTo().homePage();
       app.contact().create
               (new ContactData().withFirstname(app.properties.getProperty("web.contactFirstname"))
                               .withLastname(app.properties.getProperty("web.contactLastname"))
