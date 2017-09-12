@@ -31,7 +31,7 @@ public class HBConnectionTest {
       StandardServiceRegistryBuilder.destroy( registry );
     }
   }
-  @Test 
+  @Test
   public void testHBConnection(){
 
     Session session = sessionFactory.openSession();
