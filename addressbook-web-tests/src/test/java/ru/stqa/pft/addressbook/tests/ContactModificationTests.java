@@ -38,7 +38,6 @@ public class ContactModificationTests extends TestBase {
                       true);
     }
   }
-
   @Test
   public void testContactModification() {
     File photoModify = new File(app.properties.getProperty("web.contactPhotoModify"));
