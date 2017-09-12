@@ -7,6 +7,8 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.io.File;
+import java.util.HashSet;
+import java.util.Set;
 
 @XStreamAlias("contact")
 @Entity
@@ -18,9 +20,11 @@ public class ContactData {
   @Expose
   @Column(name = "lastname")
   private String lastname;
+
   @Expose
   @Column(name = "email")
   @Type(type = "text")
+
   private String email;
   @Expose
   @Column(name = "home")
@@ -58,15 +62,18 @@ public class ContactData {
   @Column(name = "address")
   @Type(type = "text")
   private String address;
-  @Transient
-  @Expose
-  private String group;
+  @JoinTable(name = "address_in_group",
+          joinColumns = @JoinColumn (name = "id"), inverseJoinColumns = @JoinColumn (name = "group_id"))
+  @ManyToMany
+  private Set<GroupData> groups = new HashSet<GroupData>();
   @XStreamOmitField
   @Id
   @Column(name = "id")
   private int id = Integer.MAX_VALUE;
 
-
+  public Groups getGroups() {
+    return new Groups(groups);
+  }
   public String getFirstname() {
     return firstname;
   }
@@ -123,9 +130,6 @@ public class ContactData {
     return new File(photo);
   }
 
-  public String getGroup() {
-    return group;
-  }
 
 
   @Override
@@ -207,10 +211,6 @@ public class ContactData {
     return this;
   }
 
-  public ContactData withGroup(String group) {
-    this.group = group;
-    return this;
-  }
 
   @Override
   public boolean equals(Object o) {
@@ -221,16 +221,30 @@ public class ContactData {
 
     if (id != that.id) return false;
     if (firstname != null ? !firstname.equals(that.firstname) : that.firstname != null) return false;
-    return lastname != null ? lastname.equals(that.lastname) : that.lastname == null;
+    if (lastname != null ? !lastname.equals(that.lastname) : that.lastname != null) return false;
+    if (email != null ? !email.equals(that.email) : that.email != null) return false;
+    if (phoneHome != null ? !phoneHome.equals(that.phoneHome) : that.phoneHome != null) return false;
+    if (phoneMobile != null ? !phoneMobile.equals(that.phoneMobile) : that.phoneMobile != null) return false;
+    if (phoneWork != null ? !phoneWork.equals(that.phoneWork) : that.phoneWork != null) return false;
+    if (email2 != null ? !email2.equals(that.email2) : that.email2 != null) return false;
+    if (email3 != null ? !email3.equals(that.email3) : that.email3 != null) return false;
+    if (allEmails != null ? !allEmails.equals(that.allEmails) : that.allEmails != null) return false;
+    return address != null ? address.equals(that.address) : that.address == null;
   }
 
   @Override
   public int hashCode() {
     int result = firstname != null ? firstname.hashCode() : 0;
     result = 31 * result + (lastname != null ? lastname.hashCode() : 0);
+    result = 31 * result + (email != null ? email.hashCode() : 0);
+    result = 31 * result + (phoneHome != null ? phoneHome.hashCode() : 0);
+    result = 31 * result + (phoneMobile != null ? phoneMobile.hashCode() : 0);
+    result = 31 * result + (phoneWork != null ? phoneWork.hashCode() : 0);
+    result = 31 * result + (email2 != null ? email2.hashCode() : 0);
+    result = 31 * result + (email3 != null ? email3.hashCode() : 0);
+    result = 31 * result + (allEmails != null ? allEmails.hashCode() : 0);
+    result = 31 * result + (address != null ? address.hashCode() : 0);
     result = 31 * result + id;
     return result;
   }
-
-
 }

@@ -11,8 +11,7 @@ import java.io.File;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class ContactModificationTests extends TestBase {
-
+public class RemoveContactfromGroup extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
@@ -61,7 +60,5 @@ public class ContactModificationTests extends TestBase {
     Contacts after = app.db().contacts();
     assertThat(after, equalTo(before.without(modifiedContact).withAdded(contact)));
   }
-
-
 
 }
