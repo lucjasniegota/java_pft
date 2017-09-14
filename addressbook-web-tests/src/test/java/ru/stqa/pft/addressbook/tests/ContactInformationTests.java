@@ -15,7 +15,8 @@ public class ContactInformationTests extends TestBase {
 
   public static String cleaned(String data) {
     return data.replaceAll("\\s", "").replaceAll("W:", "")
-            .replaceAll("H:", "").replaceAll("M:", "").replaceAll("Memberof:test5", "");
+            .replaceAll("H:", "").replaceAll("M:", "")
+            .replaceAll("Memberof:test0", "").replaceAll("Memberof:test1", "").replaceAll("Memberof:test5", "");
   }
 
   @BeforeMethod
@@ -31,7 +32,6 @@ public class ContactInformationTests extends TestBase {
               (new ContactData().withFirstname(app.properties.getProperty("web.contactFirstname"))
                               .withLastname(app.properties.getProperty("web.contactLastname"))
                               .withEmail(app.properties.getProperty("web.contactEmail"))
-                              .withGroup(app.properties.getProperty("web.groupName"))
                               .withPhoneHome(app.properties.getProperty("web.contactHome"))
                               .withPhoneMobile(app.properties.getProperty("web.contactMobile"))
                               .withPhoneWork(app.properties.getProperty("web.contactWork"))

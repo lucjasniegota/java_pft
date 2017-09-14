@@ -4,6 +4,7 @@ import com.google.gson.annotations.Expose;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import org.hibernate.annotations.Type;
+import ru.stqa.pft.addressbook.tests.TestBase;
 
 import javax.persistence.*;
 import java.io.File;
@@ -62,14 +63,18 @@ public class ContactData {
   @Column(name = "address")
   @Type(type = "text")
   private String address;
-  @JoinTable(name = "address_in_group",
+
+  @XStreamOmitField
+  @ManyToMany (fetch = FetchType.EAGER)
+  @JoinTable(name = "address_in_groups",
           joinColumns = @JoinColumn (name = "id"), inverseJoinColumns = @JoinColumn (name = "group_id"))
-  @ManyToMany
   private Set<GroupData> groups = new HashSet<GroupData>();
+
   @XStreamOmitField
   @Id
   @Column(name = "id")
   private int id = Integer.MAX_VALUE;
+
 
   public Groups getGroups() {
     return new Groups(groups);
@@ -131,14 +136,19 @@ public class ContactData {
   }
 
 
-
   @Override
   public String toString() {
     return "ContactData{" +
             "firstname='" + firstname + '\'' +
             ", lastname='" + lastname + '\'' +
+            ", groups=" + groups +
             ", id=" + id +
             '}';
+  }
+
+  public ContactData inGroup(GroupData group) {
+    groups.add(group);
+    return this;
   }
 
   public ContactData withId(int id) {
@@ -228,7 +238,6 @@ public class ContactData {
     if (phoneWork != null ? !phoneWork.equals(that.phoneWork) : that.phoneWork != null) return false;
     if (email2 != null ? !email2.equals(that.email2) : that.email2 != null) return false;
     if (email3 != null ? !email3.equals(that.email3) : that.email3 != null) return false;
-    if (allEmails != null ? !allEmails.equals(that.allEmails) : that.allEmails != null) return false;
     return address != null ? address.equals(that.address) : that.address == null;
   }
 
@@ -242,9 +251,10 @@ public class ContactData {
     result = 31 * result + (phoneWork != null ? phoneWork.hashCode() : 0);
     result = 31 * result + (email2 != null ? email2.hashCode() : 0);
     result = 31 * result + (email3 != null ? email3.hashCode() : 0);
-    result = 31 * result + (allEmails != null ? allEmails.hashCode() : 0);
     result = 31 * result + (address != null ? address.hashCode() : 0);
     result = 31 * result + id;
     return result;
   }
+
+
 }

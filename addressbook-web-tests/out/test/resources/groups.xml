@@ -2,16 +2,7 @@
   <group>
     <name>test5</name>
     <header>header0</header>
+    <contacts/>
     <footer>footer0</footer>
-  </group>
-  <group>
-    <name>test5</name>
-    <header>header1</header>
-    <footer>footer1</footer>
-  </group>
-  <group>
-    <name>test5</name>
-    <header>header2</header>
-    <footer>footer2</footer>
   </group>
 </list>

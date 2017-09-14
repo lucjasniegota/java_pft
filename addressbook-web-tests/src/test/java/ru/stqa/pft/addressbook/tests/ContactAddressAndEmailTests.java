@@ -27,7 +27,6 @@ public class ContactAddressAndEmailTests extends TestBase {
               (new ContactData().withFirstname(app.properties.getProperty("web.contactFirstname"))
                               .withLastname(app.properties.getProperty("web.contactLastname"))
                               .withEmail(app.properties.getProperty("web.contactEmail"))
-                              .withGroup(app.properties.getProperty("web.groupName"))
                                .withAddress(app.properties.getProperty("web.contactAddress"))
                                .withEmail2(app.properties.getProperty("web.contactEmail2"))
                                .withEmail3(app.properties.getProperty("web.contactEmail3")),
