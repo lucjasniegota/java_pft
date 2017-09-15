@@ -202,10 +202,22 @@ public class ContactHelper extends HelperBase {
     new Select(wd.findElement(By.name("to_group")))
             .selectByVisibleText(contact.getGroups().iterator().next().getName());
   }
+  public void selectGroup(Groups groups) {
+    new Select(wd.findElement(By.name("group")))
+            .selectByVisibleText(groups.iterator().next().getName());
+  }
 
   public void addContacttoGroup() {
     submitContactAddtoGroup();
     returnToGroupwithContacts();
+  }
+  public void removeContactfromGroup() {
+    submitContactRemovefromGroup();
+    returnToGroupwithContacts();
+  }
+
+  private void submitContactRemovefromGroup() {click(By.name("remove"));
+
   }
 
   public void returnToGroupwithContacts() {
