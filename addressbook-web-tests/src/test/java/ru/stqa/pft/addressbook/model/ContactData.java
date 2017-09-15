@@ -64,6 +64,15 @@ public class ContactData {
   @Type(type = "text")
   private String address;
 
+  @Override
+  public String toString() {
+    return "ContactData{" +
+            "firstname='" + firstname + '\'' +
+            ", lastname='" + lastname + '\'' +
+            ", id=" + id +
+            '}';
+  }
+
   @XStreamOmitField
   @ManyToMany (fetch = FetchType.EAGER)
   @JoinTable(name = "address_in_groups",
@@ -135,16 +144,6 @@ public class ContactData {
     return new File(photo);
   }
 
-
-  @Override
-  public String toString() {
-    return "ContactData{" +
-            "firstname='" + firstname + '\'' +
-            ", lastname='" + lastname + '\'' +
-            ", groups=" + groups +
-            ", id=" + id +
-            '}';
-  }
 
   public ContactData inGroup(GroupData group) {
     groups.add(group);

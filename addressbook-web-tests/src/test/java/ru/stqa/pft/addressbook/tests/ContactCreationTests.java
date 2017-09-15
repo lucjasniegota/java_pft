@@ -90,7 +90,7 @@ BufferedReader reader = new BufferedReader(new FileReader(new File(app.propertie
     assertThat(app.contact().count(), equalTo(before.size() + 1));
     Contacts after = app.db().contacts();
     assertThat(after, equalTo(before.withAdded(contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
-
+    verifyContactListInUI();
   }
 
 }
