@@ -1,4 +1,4 @@
-package ru.stqa.pft.mantis.tests;
+package ru.stqa.pft.mantis.appmanager;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
@@ -24,7 +24,6 @@ public class HttpSession {
     this.app = app;
     httpclient = HttpClients.custom().setRedirectStrategy(new LaxRedirectStrategy()).build();
   }
-
   public boolean login(String username, String password) throws IOException {
     HttpPost post = new HttpPost(app.getProperty("web.baseUrl") + "/login.php");
     List<NameValuePair> params = new ArrayList<NameValuePair>();
@@ -35,7 +34,7 @@ public class HttpSession {
     post.setEntity(new UrlEncodedFormEntity(params));
     CloseableHttpResponse response = httpclient.execute(post);
     String body = getTextFrom(response);
-    return body.contains(String.format("<span class=\"italic\">%s</span>", username));
+    return body.contains(String.format("<span class=\"label hidden-xs label-default arrowed\">%s</span>", username));
   }
 
   private String getTextFrom(CloseableHttpResponse response) throws IOException {
@@ -49,6 +48,6 @@ public boolean isLoggedInAs(String username) throws IOException {
   HttpGet get = new HttpGet(app.getProperty("web.baseUrl") + "/index.php");
   CloseableHttpResponse response = httpclient.execute(get);
   String body = getTextFrom(response);
-  return body.contains(String.format("<span class=\"italic\"</span>", username));
+  return body.contains(String.format("<span class=\"label hidden-xs label-default arrowed\">%s</span>", username));
 }
 }

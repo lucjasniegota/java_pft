@@ -47,4 +47,7 @@ public class ApplicationManager {
   public String getProperty(String key) {
     return properties.getProperty(key);
   }
+  public HttpSession newSession (){
+    return new HttpSession (this);
+  }
 }
