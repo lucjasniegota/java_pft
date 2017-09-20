@@ -14,6 +14,7 @@ public class TestBase {
   public void setUp() throws Exception {
     app.init();
   }
+
   @AfterSuite(alwaysRun = true)
   public void tearDown() {
     app.stop();
