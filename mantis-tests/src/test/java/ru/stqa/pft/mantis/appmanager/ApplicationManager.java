@@ -45,13 +45,6 @@ public class ApplicationManager {
     return new HttpSession(this);
   }
 
-  public RegistrationHelper registration() {
-    if (registrationHelper == null) {
-      registrationHelper = new RegistrationHelper(this);
-    }
-    return registrationHelper;
-  }
-
   public WebDriver getDriver() {
     if (wd == null) {
       if (browser.equals(BrowserType.FIREFOX)) {
@@ -73,4 +66,12 @@ public class ApplicationManager {
     }
     return ftp;
   }
-}
+  public RegistrationHelper registration() {
+    if (registrationHelper == null) {
+      registrationHelper = new RegistrationHelper(this);
+    }
+    return registrationHelper;
+  }
+  public MailHelper mailHelper(){
+    return null;
+  }}
