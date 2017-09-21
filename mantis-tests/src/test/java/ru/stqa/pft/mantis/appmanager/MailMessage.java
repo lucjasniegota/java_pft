@@ -1,5 +1,5 @@
 package ru.stqa.pft.mantis.appmanager;
-
+/*
 public class MailMessage {
   public String to;
   public String text;
@@ -8,3 +8,4 @@ public class MailMessage {
     this.text = text;
   }}
 }
+*/

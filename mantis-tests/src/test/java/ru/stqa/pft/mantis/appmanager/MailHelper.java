@@ -1,5 +1,5 @@
 package ru.stqa.pft.mantis.appmanager;
-
+/*
 public class MailHelper {
   private ApplicationManager app;
   private final Wiser wiser;
@@ -35,3 +35,4 @@ throw new Error ("No mail :(");}
   public void stop(){wiser.stop();
   }
 }
+*/
