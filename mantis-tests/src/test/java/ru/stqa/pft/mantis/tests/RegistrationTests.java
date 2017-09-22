@@ -18,8 +18,8 @@ public void startMailServer(){
 
   @Test
   public void testRegistration() throws IOException, MessagingException {
- String email = "user2@localhost.localdomain";
-   app.registration().start("user2", email);
+ String email = "user6@localhost.localdomain";
+   app.registration().start("user6", email);
    List<MailMessage> mailMessages =  app.mail().waitForMail(2,10000);
  String confirmationLink =  findConfirmationLink(mailMessages, email);
     app.registration().finish(confirmationLink, "password");
@@ -27,7 +27,7 @@ public void startMailServer(){
 
   private String findConfirmationLink(List<MailMessage> mailMessages, String email) {
   MailMessage mailMessage = mailMessages.stream().filter((m) -> m.to.equals(email)).findFirst().get();
-    VerbalExpression regex = VerbalExpression.regex().find("http;//").nonSpace().oneOrMore().build();
+    VerbalExpression regex = VerbalExpression.regex().find("http://").nonSpace().oneOrMore().build();
     return regex.getText(mailMessage.text);
   }
 
