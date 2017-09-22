@@ -18,8 +18,8 @@ public class RegistrationTests extends TestBase {
 
   @Test
   public void testRegistration() throws IOException, MessagingException {
-    String email = "user1@localhost.localdomain";
-    app.registration().start("user1", email);
+ String email = "user1@localhost.localdomain";
+   app.registration().start("user1", email);
  //  List<MailMessage> mailMessages =  app.mail().waitForMail(2,10000);
  // String confirmationLink =  findConfirmationLink(mailMessages, email);
 //app.registration().finish(confirmationLink, "password");

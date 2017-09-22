@@ -1,0 +1,14 @@
+<list>
+  <contact>
+    <firstname>Firstname0</firstname>
+    <lastname>Lastname0</lastname>
+    <email>email0</email>
+    <phoneHome>home0</phoneHome>
+    <phoneMobile>mobile0</phoneMobile>
+    <phoneWork>work0</phoneWork>
+    <email2>email20</email2>
+    <email3>email30</email3>
+    <photo>src\test\resources\hiszp.png</photo>
+    <address>adres0</address>
+  </contact>
+</list>
