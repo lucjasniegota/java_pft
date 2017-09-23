@@ -68,21 +68,25 @@ public class ApplicationManager {
     }
     return ftp;
   }
+
   public RegistrationHelper registration() {
     if (registrationHelper == null) {
       registrationHelper = new RegistrationHelper(this);
     }
     return registrationHelper;
   }
+
   public ChangePasswordHelper changePassword() {
     if (changePasswordHelper == null) {
       changePasswordHelper = new ChangePasswordHelper(this);
     }
     return changePasswordHelper;
   }
-  public MailHelper mail(){
-    if(mailHelper == null){
+
+  public MailHelper mail() {
+    if (mailHelper == null) {
       mailHelper = new MailHelper(this);
     }
     return mailHelper;
-  }}
+  }
+}

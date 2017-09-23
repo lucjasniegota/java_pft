@@ -11,18 +11,19 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class MailHelper {
-  private ApplicationManager app;
   private final Wiser wiser;
+  private ApplicationManager app;
 
-  public MailHelper(ApplicationManager app){
+  public MailHelper(ApplicationManager app) {
     this.app = app;
     wiser = new Wiser();
   }
-  public static MailMessage toModelMail(WiserMessage m){
+
+  public static MailMessage toModelMail(WiserMessage m) {
     try {
       MimeMessage mm = m.getMimeMessage();
-      return new MailMessage (mm.getAllRecipients()[0].toString(), (String)mm.getContent());}
-    catch (MessagingException e){
+      return new MailMessage(mm.getAllRecipients()[0].toString(), (String) mm.getContent());
+    } catch (MessagingException e) {
       e.printStackTrace();
       return null;
     } catch (IOException e) {
@@ -31,24 +32,27 @@ public class MailHelper {
     }
   }
 
-  public List<MailMessage> waitForMail (int count, long timeout) throws MessagingException, IOException {
+  public List<MailMessage> waitForMail(int count, long timeout) throws MessagingException, IOException {
     long start = System.currentTimeMillis();
-    while (System.currentTimeMillis() <start + timeout){
-      if (wiser.getMessages().size()>=count){
+    while (System.currentTimeMillis() < start + timeout) {
+      if (wiser.getMessages().size() >= count) {
         return wiser.getMessages().stream().map((m) -> toModelMail(m)).collect(Collectors.toList());
       }
-      try{
+      try {
         Thread.sleep(1000);
-      }catch (InterruptedException e){
-        e.printStackTrace();}
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
     }
-throw new Error ("No mail :(");}
-
-
-
-
-  public void start(){wiser.start();
+    throw new Error("No mail :(");
   }
-  public void stop(){wiser.stop();
+
+
+  public void start() {
+    wiser.start();
+  }
+
+  public void stop() {
+    wiser.stop();
   }
 }

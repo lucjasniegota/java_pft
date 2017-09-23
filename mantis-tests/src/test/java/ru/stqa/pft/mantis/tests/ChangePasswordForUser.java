@@ -22,10 +22,10 @@ public class ChangePasswordForUser extends TestBase {
   @Test
   public void testRegistration() throws IOException, MessagingException { ;
     app.changePassword().start(app.getProperty("web.adminLogin"), app.getProperty("web.adminPassword"));
-    String email = "user12@localhost.localdomain";
-    String password = "NEWpassword";
     String user = "user12";
-    app.changePassword().changePasswordForUser();
+    String email = String.format("%s@localhost.localdomain", user);
+    String password = "NEWpassword";
+    app.changePassword().changePasswordForUser(user);
     List<MailMessage> mailMessages = app.mail().waitForMail(1, 10000);
     String confirmationLink = findConfirmationLink(mailMessages, email);
     app.changePassword().finish(confirmationLink, password);

@@ -15,6 +15,7 @@ public class ChangePasswordHelper extends HelperBase {
     type(By.name("password"), password);
     click(By.cssSelector("input[value ='Zaloguj się']"));
   }
+
   public void finish(String confirmationLink, String password) {
     wd.get(confirmationLink);
     type(By.name("password"), password);
@@ -22,10 +23,10 @@ public class ChangePasswordHelper extends HelperBase {
     click(By.xpath("//button[@type='submit']"));
   }
 
-  public void changePasswordForUser() {
+  public void changePasswordForUser(String user) {
     click(By.xpath("//li[6]/a/i"));
     click(By.linkText("Zarządzanie użytkownikami"));
-    click(By.linkText("user12"));
+    click(By.linkText(user));
     click(By.xpath("//input[@value='Nowe hasło']"));
   }
 }
