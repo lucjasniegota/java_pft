@@ -6,6 +6,8 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.lanwen.verbalregex.VerbalExpression;
 import ru.stqa.pft.mantis.model.MailMessage;
+import ru.stqa.pft.mantis.model.UserData;
+import ru.stqa.pft.mantis.model.Users;
 
 import javax.mail.MessagingException;
 import java.io.IOException;
@@ -20,16 +22,20 @@ public class ChangePasswordForUser extends TestBase {
   }
 
   @Test
-  public void testRegistration() throws IOException, MessagingException { ;
+  public void testChangePassword() throws IOException, MessagingException {
+    Users users = app.hBConnectionHelper().users();
+    UserData userTochange = users.iterator().next();
+    String userToClick = userTochange.getUsername();
     app.changePassword().start(app.getProperty("web.adminLogin"), app.getProperty("web.adminPassword"));
-    String user = "user12";
-    String email = String.format("%s@localhost.localdomain", user);
+    String email = String.format("%s@localhost.localdomain", userToClick);
     String password = "NEWpassword";
-    app.changePassword().changePasswordForUser(user);
+    app.changePassword().manageUsers();
+    app.changePassword().chooseUser(userToClick);
+
     List<MailMessage> mailMessages = app.mail().waitForMail(1, 10000);
     String confirmationLink = findConfirmationLink(mailMessages, email);
     app.changePassword().finish(confirmationLink, password);
-    assertTrue(app.newSession().login(user, password));
+    assertTrue(app.newSession().login(userToClick, password));
   }
 
   private String findConfirmationLink(List<MailMessage> mailMessages, String email) {

@@ -1,6 +1,7 @@
 package ru.stqa.pft.mantis.appmanager;
 
 import org.openqa.selenium.By;
+import ru.stqa.pft.mantis.model.UserData;
 
 public class ChangePasswordHelper extends HelperBase {
   public ChangePasswordHelper(ApplicationManager app) {
@@ -23,9 +24,14 @@ public class ChangePasswordHelper extends HelperBase {
     click(By.xpath("//button[@type='submit']"));
   }
 
-  public void changePasswordForUser(String user) {
-    click(By.xpath("//li[6]/a/i"));
+  public void manageUsers() {
+    click(By.linkText("Zarządzanie"));
+
     click(By.linkText("Zarządzanie użytkownikami"));
+
+  }
+
+  public void chooseUser(String  user) {
     click(By.linkText(user));
     click(By.xpath("//input[@value='Nowe hasło']"));
   }

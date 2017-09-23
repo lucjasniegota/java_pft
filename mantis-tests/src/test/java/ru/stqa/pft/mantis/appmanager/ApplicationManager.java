@@ -21,6 +21,7 @@ public class ApplicationManager {
   private FtpHelper ftp;
   private MailHelper mailHelper;
   private ChangePasswordHelper changePasswordHelper;
+  private HBConnectionHelper hBConnectionHelper;
 
 
   public ApplicationManager(String browser) {
@@ -31,6 +32,7 @@ public class ApplicationManager {
   public void init() throws IOException {
     String target = System.getProperty("target", "local");
     properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target))));
+    hBConnectionHelper = new HBConnectionHelper();
   }
 
   public void stop() {
@@ -89,4 +91,5 @@ public class ApplicationManager {
     }
     return mailHelper;
   }
+  public HBConnectionHelper hBConnectionHelper() {    return hBConnectionHelper;  }
 }
