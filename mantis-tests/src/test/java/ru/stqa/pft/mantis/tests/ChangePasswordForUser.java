@@ -1,7 +1,5 @@
 package ru.stqa.pft.mantis.tests;
 
-import org.openqa.selenium.By;
-import org.subethamail.wiser.WiserMessage;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -20,9 +18,8 @@ public class ChangePasswordForUser extends TestBase {
   @BeforeMethod
   public void startMailServer() throws IOException, MessagingException {
     app.mail().start();
-    int before = app.hBConnectionHelper().users().size();
-    if (before == 0) {
-      long now= System.currentTimeMillis();
+    if (app.hBConnectionHelper().users().size() == 0) {
+      long now = System.currentTimeMillis();
       String email = String.format("user%s@localhost.localdomain", now);
       String user = String.format("user%s", now);
       String password = "password";
@@ -31,7 +28,8 @@ public class ChangePasswordForUser extends TestBase {
       String confirmationLink = findConfirmationLink(mailMessages, email);
       app.registration().finish(confirmationLink, password);
       assertTrue(app.newSession().login(user, password));
-    }}
+    }
+  }
 
   @Test
   public void testChangePassword() throws IOException, MessagingException {
@@ -54,6 +52,7 @@ public class ChangePasswordForUser extends TestBase {
     VerbalExpression regex = VerbalExpression.regex().find("http://").nonSpace().oneOrMore().build();
     return regex.getText(mailMessage.text);
   }
+
   private String findConfirmationLink(List<MailMessage> mailMessages, String email) {
     MailMessage mailMessage = mailMessages.stream().filter((m) -> m.to.equals(email)).findFirst().get();
     VerbalExpression regex = VerbalExpression.regex().find("http://").nonSpace().oneOrMore().build();

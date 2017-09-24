@@ -22,6 +22,7 @@ public class ApplicationManager {
   private MailHelper mailHelper;
   private ChangePasswordHelper changePasswordHelper;
   private HBConnectionHelper hBConnectionHelper;
+  private JamesHelper jamesHelper;
 
 
   public ApplicationManager(String browser) {
@@ -78,6 +79,13 @@ public class ApplicationManager {
     return registrationHelper;
   }
 
+  public JamesHelper james() {
+    if (jamesHelper == null) {
+      jamesHelper = new JamesHelper(this);
+    }
+    return jamesHelper;
+  }
+
   public ChangePasswordHelper changePassword() {
     if (changePasswordHelper == null) {
       changePasswordHelper = new ChangePasswordHelper(this);
@@ -91,5 +99,8 @@ public class ApplicationManager {
     }
     return mailHelper;
   }
-  public HBConnectionHelper hBConnectionHelper() {    return hBConnectionHelper;  }
+
+  public HBConnectionHelper hBConnectionHelper() {
+    return hBConnectionHelper;
+  }
 }

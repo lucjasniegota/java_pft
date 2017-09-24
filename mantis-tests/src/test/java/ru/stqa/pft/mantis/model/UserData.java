@@ -15,7 +15,7 @@ public class UserData {
   private String username;
 
   @Id
-  @Column (name = "id")
+  @Column(name = "id")
   private int id;
 
 
