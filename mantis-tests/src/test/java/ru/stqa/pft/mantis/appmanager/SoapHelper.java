@@ -19,6 +19,7 @@ public class SoapHelper {
   public SoapHelper(ApplicationManager app){
     this.app = app;
   }
+
 public Set<Project> getProjects() throws MalformedURLException, ServiceException, RemoteException {
   MantisConnectPortType mc = getMantisConnect();
   ProjectData[] projects = mc.mc_projects_get_user_accessible("administrator", "root");
@@ -26,9 +27,10 @@ public Set<Project> getProjects() throws MalformedURLException, ServiceException
            .withId(p.getId().intValue())
            .withName(p.getName()))
            .collect(Collectors.toSet());
+
 }
 
-  private MantisConnectPortType getMantisConnect() throws ServiceException, MalformedURLException {
+  public MantisConnectPortType getMantisConnect() throws ServiceException, MalformedURLException {
     return new MantisConnectLocator()
             .getMantisConnectPort
                     (new URL(app.getProperty("mantis.soapurl")));
@@ -51,4 +53,5 @@ public Set<Project> getProjects() throws MalformedURLException, ServiceException
             .withSummary(createdIssueData.getSummary())
             .withProject(new Project().withId(createdIssueData.getId().intValue()));
   }
+
 }

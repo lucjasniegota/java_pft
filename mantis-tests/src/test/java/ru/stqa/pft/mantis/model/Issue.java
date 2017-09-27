@@ -5,6 +5,8 @@ public class Issue {
   private String description;
   private String summary;
   private Project project;
+  private String status;
+  private int idstatus;
 
   public int getId() {
     return id;
@@ -39,6 +41,22 @@ public class Issue {
 
   public Issue withProject(Project project) {
     this.project = project;
+    return this;
+  }
+  public String getStatus() {
+    return status;
+  }
+
+  public Issue withStatus(String status) {
+    this.status = status;
+    return this;
+  }
+  public int getIdStatus() {
+    return idstatus;
+  }
+
+  public Issue withIdStatus(int status) {
+    this.idstatus = idstatus;
     return this;
   }
 }
