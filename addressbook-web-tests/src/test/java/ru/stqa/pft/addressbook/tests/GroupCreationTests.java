@@ -29,7 +29,8 @@ public class GroupCreationTests extends TestBase {
   @DataProvider
   public Iterator<Object[]> validGroupsfromJSON() throws IOException {
     List<Object[]> list = new ArrayList<Object[]>();
-    BufferedReader reader = new BufferedReader(new FileReader(new File(app.properties.getProperty("web.groupFileJSON"))));
+    BufferedReader reader = new BufferedReader
+            (new FileReader(new File(app.properties.getProperty("web.groupFileJSON"))));
     String json = "";
     String line = reader.readLine();
     while (line != null) {
