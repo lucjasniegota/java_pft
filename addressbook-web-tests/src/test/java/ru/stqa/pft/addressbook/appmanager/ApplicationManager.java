@@ -48,7 +48,8 @@ if ("".equals(properties.getProperty("selenium.server")))
     else {
   DesiredCapabilities capabilities = new DesiredCapabilities();
   capabilities.setBrowserName(browser);
-  wd = new RemoteWebDriver(new URL(properties.getProperty("selenium.server")),capabilities);
+  wd = new RemoteWebDriver(new URL(properties.getProperty("selenium.server"))
+          ,capabilities);
     }
 
 
